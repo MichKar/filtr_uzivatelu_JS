@@ -4,13 +4,11 @@ const usersList = [];
 
 getData();
 
-input.addEventListener("input", function(e){
+input.addEventListener("input", function (e) {
     dataFilter(e.target.value);
 });
 
-
-
-async function getData(){
+async function getData() {
     const allUsers = await fetch("https://randomuser.me/api?results=50");
     const data = await allUsers.json();
     console.log(data);
@@ -18,11 +16,10 @@ async function getData(){
     // Vyčistit li
     result.innerHTML = "";
 
-
-// Zprovoznění vyhledávání
+    // Zprovoznění vyhledávání
     data.results.forEach(user => {
         const li = document.createElement("li");
-        
+
         li.innerHTML = `
             <img src="${user.picture.large}" alt="${user.name.first}">
             <div class="user-information">
@@ -31,21 +28,16 @@ async function getData(){
             </div>
         `
         result.appendChild(li);
-
         usersList.push(li);
-
     });
 }
 
-
-
-function dataFilter(inputText){
+function dataFilter(inputText) {
     usersList.forEach(oneUser => {
-        if(oneUser.innerText.toLowerCase().includes(inputText.toLowerCase())){
+        if (oneUser.innerText.toLowerCase().includes(inputText.toLowerCase())) {
             oneUser.classList.remove("hide");
         } else {
             oneUser.classList.add("hide");
         }
     });
 }
-
